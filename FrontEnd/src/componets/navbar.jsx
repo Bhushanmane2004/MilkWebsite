@@ -1,0 +1,139 @@
+import React, { useState } from "react";
+import { Menu, X, ShoppingCart } from "lucide-react";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { title: "HOME", href: "#" },
+    { title: "ABOUT US", href: "#" },
+    { title: "FARM", href: "#" },
+    { title: "BLOG", href: "#" },
+    { title: "PRODUCTS", href: "#" },
+    { title: "RECIPES", href: "#" },
+    { title: "CONTACTS", href: "#" },
+  ];
+
+  return (
+    <nav className="w-full">
+      {/* Top bar */}
+      <div className="bg-zinc-900 text-white py-2 px-4">
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
+          <div className="flex items-center space-x-2 mb-2 sm:mb-0">
+            <span className="whitespace-nowrap">(800)-456-789</span>
+            <span className="hidden sm:inline whitespace-nowrap">
+              MON-FR: 8AM - 8PM, ST-SN: 8AM - 4PM
+            </span>
+          </div>
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <a href="#" className="hover:text-yellow-400">
+              Twitter
+            </a>
+            <a href="#" className="hover:text-yellow-400">
+              Facebook
+            </a>
+            <a href="#" className="hover:text-yellow-400 hidden sm:inline">
+              Google+
+            </a>
+            <a href="#" className="hover:text-yellow-400 hidden sm:inline">
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Header with Logo and Title - hidden on mobile */}
+      <div className="relative bg-[url('./header_bg7.png')] bg-cover bg-center h-20 items-center justify-center p-4 hidden sm:flex">
+        {/* Logo at the Left Corner */}
+        <a href="#" className="absolute left-4">
+          <img src="./logo-dairy.png" alt="Jacksons Milk" className="h-20" />
+        </a>
+
+        {/* Centered Text */}
+        <p className="text-black font-bold text-2xl md:text-3xl text-center">
+          शिवामृत दूध उत्पादक सहकारी संघ मर्यादित, अकलूज
+        </p>
+      </div>
+
+      {/* Main navbar - white for mobile */}
+      <div className="bg-white sm:bg-yellow-500 shadow-md">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center h-16">
+            {/* Mobile Logo and Title */}
+            <div className="flex items-center sm:hidden">
+              <a href="#" className="mr-3">
+                <img
+                  src="./logo-dairy.png"
+                  alt="Jacksons Milk"
+                  className="h-12"
+                />
+              </a>
+              <p className="text-black font-bold text-sm">
+                शिवामृत दूध उत्पादक संघ
+              </p>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-4 lg:space-x-8 overflow-x-auto">
+              {navLinks.map((link) => (
+                <a
+                  key={link.title}
+                  href={link.href}
+                  className="text-gray-700 hover:text-white font-medium whitespace-nowrap text-sm lg:text-base"
+                >
+                  {link.title}
+                </a>
+              ))}
+            </div>
+
+            {/* Shopping Cart */}
+            <div className="flex items-center">
+              <div className="relative flex items-center">
+                <ShoppingCart className="h-6 w-6 text-gray-700" />
+                <span className="absolute -top-2 -right-2 bg-yellow-400 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+                <span className="ml-2 text-gray-700">$0.00</span>
+              </div>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-gray-700 hover:text-yellow-500"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isOpen && (
+            <div className="md:hidden transition-all duration-300 ease-in-out max-h-screen overflow-hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.title}
+                    href={link.href}
+                    className="block px-3 py-2 text-gray-700 hover:bg-yellow-400 hover:text-white rounded-md font-medium transition duration-150"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
