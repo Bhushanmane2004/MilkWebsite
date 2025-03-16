@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Navbar from "./componets/navbar";
+import Footer from "./componets/footer";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,6 +12,8 @@ function App() {
     <>
       <div className="">
         <Navbar />
+        <div className="h-[80vh]"></div>
+        <Footer />
       </div>
     </>
   );
